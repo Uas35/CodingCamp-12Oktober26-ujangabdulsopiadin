@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Life Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <div class="logo">
+                <i class="fas fa-check-circle"></i>
+                <h1>Life Dashboard</h1>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                    <span class="theme-text" id="theme-text">Dark Mode</span>
+                </button>
+            </div>
+            <div class="greeting-section">
+                <div class="greeting-text" id="greeting-text">
+                    Good morning, User!
+                </div>
+                <div class="datetime-display" id="datetime-display">
+                    Friday, October 16, 2026 • 12:00 PM
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Left Column: Focus Timer -->
+            <section class="dashboard-column focus-timer-column">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-hourglass-half"></i> Focus Timer</h2>
+                        <p class="card-subtitle">Pomodoro-style 25-minute timer</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="timer-display" id="timer-display">
+                            25:00
+                        </div>
+                        <div class="timer-controls">
+                            <button class="btn btn-primary" id="start-timer">
+                                <i class="fas fa-play"></i> Start
+                            </button>
+                            <button class="btn btn-secondary" id="stop-timer">
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                            <button class="btn btn-outline" id="reset-timer">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                        <div class="timer-status" id="timer-status">
+                            Ready to focus!
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Middle Column: To-Do List -->
+            <section class="dashboard-column todo-column">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-tasks"></i> To-Do List</h2>
+                        <p class="card-subtitle">Manage your daily tasks</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="todo-input-container">
+                            <input 
+                                type="text" 
+                                id="todo-input" 
+                                placeholder="Add a new task..." 
+                                class="todo-input"
+                            >
+                            <button class="btn btn-primary" id="add-todo">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div class="duplicate-warning" id="duplicate-warning" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>This task already exists!</span>
+                            <button class="btn btn-text" id="show-duplicates">Show duplicates</button>
+                        </div>
+                        <div class="todo-controls">
+                            <div class="todo-filters">
+                                <button class="filter-btn active" data-filter="all">All</button>
+                                <button class="filter-btn" data-filter="active">Active</button>
+                                <button class="filter-btn" data-filter="completed">Completed</button>
+                            </div>
+                            <div class="todo-sort">
+                                <select class="sort-select" id="sort-select" aria-label="Sort tasks by">
+                                    <option value="created-desc">Newest first</option>
+                                    <option value="created-asc">Oldest first</option>
+                                    <option value="alphabetical-asc">A to Z</option>
+                                    <option value="alphabetical-desc">Z to A</option>
+                                    <option value="priority">Priority</option>
+                                    <option value="due-date">Due Date</option>
+                                </select>
+                                <button class="icon-btn sort-btn" id="sort-direction" aria-label="Toggle sort direction">
+                                    <i class="fas fa-sort-amount-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="todo-list-container">
+                            <ul class="todo-list" id="todo-list">
+                                <!-- To-do items will be dynamically added here -->
+                            </ul>
+                            <div class="todo-stats">
+                                <span id="task-count">0 tasks</span>
+                                <button class="btn btn-text" id="clear-completed" style="display: none;">
+                                    Clear completed
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Quick Links -->
+            <section class="dashboard-column links-column">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-link"></i> Quick Links</h2>
+                        <p class="card-subtitle">Access your favorite websites</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="link-input-container">
+                            <input 
+                                type="text" 
+                                id="link-name-input" 
+                                placeholder="Link name..." 
+                                class="link-input"
+                            >
+                            <input 
+                                type="text" 
+                                id="link-url-input" 
+                                placeholder="https://example.com" 
+                                class="link-input"
+                            >
+                            <button class="btn btn-primary" id="add-link">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div class="links-container">
+                            <div class="links-grid" id="links-grid">
+                                <!-- Quick links will be dynamically added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <p>To-Do List Life Dashboard • All data stored locally in your browser • No backend required</p>
+            <p class="footer-note">
+                <i class="fas fa-info-circle"></i> 
+                This dashboard uses Local Storage to save your data
+            </p>
+        </footer>
+    </div>
+
+    <!-- JavaScript will be added later -->
+    <script src="js/script.js"></script>
+</body>
+</html>
